@@ -162,7 +162,7 @@ plant-id/
 
 ## 👨‍💻 作者
 
-- **你的名字** - [@你的 GitHub 用户名](https://github.com/wuwendi04-star)
+- https://github.com/wuwendi04-star
 
 ---
 
