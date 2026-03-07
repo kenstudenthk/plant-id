@@ -1,12 +1,17 @@
 import SwiftUI
 
 enum AppColors {
+    // Brand primary (forest green accent)
+    static let primary          = Color(hex: "#5C8A63")
+
     // Background gradient stops (match Android)
     static let backgroundTop    = Color(hex: "#C3D0AB")
     static let backgroundMid    = Color(hex: "#D4E0BB")
     static let backgroundBottom = Color(hex: "#E6EFCE")
+    static let background       = Color(hex: "#E6EFCE")
 
-    // Primary surface
+    // Surfaces
+    static let surface          = Color.white.opacity(0.85)
     static let cardBackground   = Color.white.opacity(0.85)
     static let cardBorder       = Color(hex: "#B8C9A3")
 
