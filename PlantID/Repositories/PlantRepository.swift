@@ -1,5 +1,6 @@
 import Foundation
 
+@MainActor
 protocol PlantRepository {
     func insert(_ plant: Plant) throws
     func update() throws

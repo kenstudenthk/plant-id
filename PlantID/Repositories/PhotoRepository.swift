@@ -1,5 +1,6 @@
 import Foundation
 
+@MainActor
 protocol PhotoRepository {
     func insert(_ photo: Photo) throws
     func delete(_ photo: Photo) throws

@@ -1,5 +1,6 @@
 import Foundation
 
+@MainActor
 protocol WateringLogRepository {
     func insert(_ log: WateringLog) throws
     func delete(_ log: WateringLog) throws
