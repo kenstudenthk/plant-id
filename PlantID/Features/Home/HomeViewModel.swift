@@ -8,6 +8,7 @@ enum WateringUrgency {
     case overdue
 }
 
+@MainActor
 @Observable
 final class HomeViewModel {
     var selectedTab: Int = 0

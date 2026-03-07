@@ -6,7 +6,7 @@ struct PhotoTimelineView: View {
     @Environment(AppRouter.self) private var router
 
     let plantId: UUID
-    let plantName: String
+    var plantName: String = ""
 
     @State private var vm: PhotoTimelineViewModel?
     @State private var lightboxPhoto: Photo?

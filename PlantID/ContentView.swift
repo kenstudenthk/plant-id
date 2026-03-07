@@ -33,7 +33,7 @@ struct ContentView: View {
             .toolbar(.hidden, for: .tabBar)
             .ignoresSafeArea(edges: .bottom)
 
-            FloatingTabBar(selectedTab: $router.selectedTab)
+            FloatingTabBar(selected: $router.selectedTab, onNfcScan: { router.navigateToNfcScan() })
         }
     }
 

@@ -14,6 +14,7 @@ struct PlantCareItem: Identifiable {
     var needsAttention: Bool { isOverdue || isDueToday }
 }
 
+@MainActor
 @Observable
 final class CareViewModel {
     var careItems: [PlantCareItem] = []

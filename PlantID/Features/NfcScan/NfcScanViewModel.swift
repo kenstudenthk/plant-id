@@ -9,6 +9,7 @@ enum NfcNavEvent: Equatable {
     case tagOrphaned(String)
 }
 
+@MainActor
 @Observable
 final class NfcScanViewModel {
     var navEvent: NfcNavEvent = .none

@@ -2,6 +2,7 @@ import SwiftData
 import Observation
 import Foundation
 
+@MainActor
 @Observable
 final class EditPlantViewModel {
     var iconName: String = "monstera"

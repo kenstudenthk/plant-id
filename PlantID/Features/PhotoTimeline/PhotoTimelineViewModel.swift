@@ -14,6 +14,7 @@ struct PhotoGroup: Identifiable {
     var id: Date { month }
 }
 
+@MainActor
 @Observable
 final class PhotoTimelineViewModel {
     var allPhotos: [Photo] = []
