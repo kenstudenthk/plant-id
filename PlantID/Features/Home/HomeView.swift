@@ -93,7 +93,7 @@ struct HomeView: View {
         let plants = (viewModel?.selectedTab ?? 0) == 0
             ? (viewModel?.alivePlants ?? [])
             : (viewModel?.archivedPlants ?? [])
-        let statusMap = viewModel?.wateringStatusMap ?? [:]
+        let daysMap = viewModel?.daysUntilWateringMap ?? [:]
 
         if plants.isEmpty {
             emptyState
@@ -101,7 +101,7 @@ struct HomeView: View {
             ScrollView {
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                     ForEach(plants) { plant in
-                        PlantCard(plant: plant, urgency: statusMap[plant.id] ?? .ok) {
+                        PlantCard(plant: plant, daysUntilWatering: daysMap[plant.id]) {
                             router.navigateToPlantDetail(plant.id)
                         }
                     }

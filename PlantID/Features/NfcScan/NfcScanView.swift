@@ -129,6 +129,8 @@ struct NfcScanView: View {
     }
 
     private func handleNavEvent(_ event: NfcNavEvent?) {
+        guard let event = event else { return }
+        
         switch event {
         case .goToDetail(let id):
             viewModel?.consumeNavEvent()
@@ -137,9 +139,10 @@ struct NfcScanView: View {
         case .goToCreate(let tagId):
             viewModel?.consumeNavEvent()
             router.navigateToCreatePlant(nfcTagId: tagId)
-        case .tagOrphaned:
+        case .tagOrphaned(let tagId):
             viewModel?.consumeNavEvent()
-        case .none, nil:
+            // Tag was orphaned - could show an alert or handle accordingly
+        case .none:
             break
         }
     }
