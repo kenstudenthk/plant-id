@@ -2,9 +2,10 @@ import SwiftUI
 
 struct FormField: View {
     let label: String
-    let placeholder: String
+    var placeholder: String = ""
     @Binding var text: String
     var isMultiline: Bool = false
+    var error: String? = nil
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -29,6 +30,12 @@ struct FormField: View {
                         RoundedRectangle(cornerRadius: 10)
                             .fill(AppColors.surface)
                     )
+            }
+            
+            if let error {
+                Text(error)
+                    .font(AppFonts.caption())
+                    .foregroundStyle(AppColors.urgencyOverdue)
             }
         }
     }

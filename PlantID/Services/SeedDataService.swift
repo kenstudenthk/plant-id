@@ -4,24 +4,20 @@ import Foundation
 enum SeedDataService {
     private static let seededKey = "sample_data_seeded"
 
-    static func seedIfNeeded(
+    @MainActor static func seedIfNeeded(
         plantRepository: PlantRepository
     ) {
         guard !UserDefaults.standard.bool(forKey: seededKey) else { return }
         do {
             let samples: [Plant] = [
                 Plant(name: "Pothos", species: "Epipremnum aureum",
-                      wateringIntervalDays: 5, iconName: "monstera",
-                      notes: "Tolerates low light. Water when soil is dry."),
+                      wateringIntervalDays: 5, notes: "Tolerates low light. Water when soil is dry.", iconName: "monstera"),
                 Plant(name: "Cactus", species: "Echinocactus grusonii",
-                      wateringIntervalDays: 21, iconName: "cactus",
-                      notes: "Loves bright light. Very drought-tolerant."),
+                      wateringIntervalDays: 21, notes: "Loves bright light. Very drought-tolerant.", iconName: "cactus"),
                 Plant(name: "Snake Plant", species: "Sansevieria trifasciata",
-                      wateringIntervalDays: 14, iconName: "schefflera",
-                      notes: "Tolerates low light. Avoid overwatering."),
+                      wateringIntervalDays: 14, notes: "Tolerates low light. Avoid overwatering.", iconName: "schefflera"),
                 Plant(name: "Monstera", species: "Monstera deliciosa",
-                      wateringIntervalDays: 7, iconName: "monstera",
-                      notes: "Loves warmth and humidity. Keep soil moist."),
+                      wateringIntervalDays: 7, notes: "Loves warmth and humidity. Keep soil moist.", iconName: "monstera"),
             ]
             for plant in samples {
                 try plantRepository.insert(plant)

@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftUI
 import SwiftData
 
 struct PlantDetailView: View {
@@ -31,7 +32,8 @@ struct PlantDetailView: View {
 
                 if vm.showWateringSuccess {
                     WateringSuccessDialog(
-                        plant: plant,
+                        plantName: plant.name,
+                        nextWateringDays: plant.wateringIntervalDays,
                         onDismiss: { vm.dismissWateringSuccess() }
                     )
                 }
@@ -61,6 +63,7 @@ struct PlantDetailView: View {
         }
         .sheet(isPresented: $showWaterSheet) {
             WaterConfirmSheet(
+                plantName: viewModel?.plant?.name ?? "Plant",
                 onWaterOnly: {
                     viewModel?.addWatering()
                     showWaterSheet = false
@@ -69,6 +72,9 @@ struct PlantDetailView: View {
                     pendingWatering = true
                     showWaterSheet = false
                     showCamera = true
+                },
+                onDismiss: {
+                    showWaterSheet = false
                 }
             )
             .presentationDetents([.medium])
@@ -110,9 +116,9 @@ struct PlantDetailView: View {
                     .font(AppFonts.body())
                     .foregroundStyle(AppColors.textSecondary)
                 HStack(spacing: 8) {
-                    StatusBadge(text: "\(vm.daysKept) days", color: AppColors.statusAlive)
+                    customBadge(text: "\(vm.daysKept) days", color: AppColors.statusAlive)
                     if vm.lastWateredDaysAgo >= 0 {
-                        StatusBadge(text: "Watered \(vm.lastWateredDaysAgo)d ago", color: AppColors.urgencyOK)
+                        customBadge(text: "Watered \(vm.lastWateredDaysAgo)d ago", color: AppColors.urgencyOK)
                     }
                 }
             }
@@ -240,6 +246,17 @@ struct PlantDetailView: View {
         }
         .padding(16)
         .cardStyle()
+    }
+    
+    private func customBadge(text: String, color: Color) -> some View {
+        Text(text)
+            .font(AppFonts.badge())
+            .foregroundStyle(.white)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 3)
+            .background(
+                Capsule().fill(color)
+            )
     }
 }
 

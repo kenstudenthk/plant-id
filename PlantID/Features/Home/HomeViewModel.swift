@@ -14,7 +14,7 @@ final class HomeViewModel {
     var selectedTab: Int = 0
     var alivePlants: [Plant] = []
     var archivedPlants: [Plant] = []
-    var wateringStatusMap: [UUID: WateringUrgency] = [:]
+    var daysUntilWateringMap: [UUID: Int] = [:]
 
     private let plantRepo: PlantRepository
     private let wateringLogRepo: WateringLogRepository
@@ -35,24 +35,14 @@ final class HomeViewModel {
     }
 
     private func computeWateringStatus() {
-        var map: [UUID: WateringUrgency] = [:]
+        var map: [UUID: Int] = [:]
         for plant in alivePlants {
             let last = try? wateringLogRepo.getLastWatering(plantId: plant.id)
-            let daysSince = last.map { Date().daysSince($0.wateredAt) } ?? -1
-
-            let urgency: WateringUrgency
-            switch daysSince {
-            case ..<0:
-                urgency = .ok
-            case let d where d > plant.wateringIntervalDays:
-                urgency = .overdue
-            case let d where d == plant.wateringIntervalDays:
-                urgency = .dueToday
-            default:
-                urgency = .ok
-            }
-            map[plant.id] = urgency
+            let daysSince = last.map { Date().daysSince($0.wateredAt) } ?? 0
+            
+            let daysUntilWatering = plant.wateringIntervalDays - daysSince
+            map[plant.id] = daysUntilWatering
         }
-        wateringStatusMap = map
+        daysUntilWateringMap = map
     }
 }

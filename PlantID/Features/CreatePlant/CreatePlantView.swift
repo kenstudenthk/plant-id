@@ -120,25 +120,3 @@ struct CreatePlantView: View {
         .cardStyle()
     }
 }
-
-struct FormField: View {
-    let label: String
-    @Binding var text: String
-    let error: String?
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(label)
-                .font(AppFonts.caption())
-                .foregroundStyle(AppColors.textSecondary)
-            TextField("", text: $text)
-                .font(AppFonts.body())
-                .foregroundStyle(AppColors.textPrimary)
-            if let error {
-                Text(error)
-                    .font(AppFonts.caption())
-                    .foregroundStyle(AppColors.urgencyOverdue)
-            }
-        }
-    }
-}
